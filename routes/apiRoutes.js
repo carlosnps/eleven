@@ -1,12 +1,6 @@
 const router = require("express").Router();
-const store = require("../db/store");
 
-// GET "/api/notes" responds with all notes from the database
-router.get("/notes", (req, res) => {
-
-});
-
-router.post("/notes", (req, res) => {
+router.post('/', function(req, res) {
 
 });
 
