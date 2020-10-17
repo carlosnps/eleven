@@ -12,24 +12,13 @@
     crossorigin="anonymous">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
   <script>
-      $(document).ready(function(){
+      function myFunction() {
         var title,text;
-        alert('in submit fucntion');
-        $(".postit").click(function(){
           title=$(".note-title").val();
-          //title='aaa';
           text=$(".note-textarea").val();
-          //text='bbb';
-          alert("text is " + text + "title is " + title);
-
           $.post("http://localhost:3000/apinotes",{title: title,text: text}, function(data){
-            if(data !=='yes') {
-                alert("login success");
-              }
           });
-          alert("out of submit ");
-        });
-      });
+      };
   </script>
 </head>
 
@@ -53,7 +42,7 @@
       <div class="col-8">
           <input class="note-title" name="ntitle" placeholder="Note Title" maxlength="28" type="text">
           <textarea class="note-textarea" name="ntext" placeholder="Note Text"></textarea>
-          <input class="postit" type="submit" value="Submit">
+          <input onclick="myFunction()" class="postit" type="submit" value="Submit">
       </div>
     </div>
   </div>
