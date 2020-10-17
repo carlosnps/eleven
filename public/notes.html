@@ -12,12 +12,26 @@
     crossorigin="anonymous">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
   <script>
-      function myFunction() {
+      function addJson() {
         var title,text;
-          title=$(".note-title").val();
-          text=$(".note-textarea").val();
-          $.post("http://localhost:3000/apinotes",{title: title,text: text}, function(data){
-          });
+        title=$(".note-title").val();
+        text=$(".note-textarea").val();
+        $.post("http://localhost:3000/apinotes",{title: title,text: text}, function(data){
+          $(".addjson").html(data);
+        });
+      };
+      function deleteJson() {
+        var key;
+        id=$(".key-del").val();
+        var url = "/api/notes/" + id;
+        $.ajax({
+          url: url,
+          type: "DELETE",
+
+          success: function(data){
+            $(".deljson").html(data);
+          }
+        });
       };
   </script>
 </head>
@@ -39,10 +53,20 @@
           </ul>
         </div>
       </div>
+
       <div class="col-8">
-          <input class="note-title" name="ntitle" placeholder="Note Title" maxlength="28" type="text">
-          <textarea class="note-textarea" name="ntext" placeholder="Note Text"></textarea>
-          <input onclick="myFunction()" class="postit" type="submit" value="Submit">
+          <p style="font-size: 200%">Add a note</p>
+          <div class="addjson">
+            <input class="note-title" name="ntitle" placeholder="Note Title" maxlength="28" type="text">
+            <textarea class="note-textarea" name="ntext" placeholder="Note Text"></textarea>
+            <input onclick="addJson()" class="postit" type="submit" value="Submit">
+          </div>
+          <p style="font-size: 200%"><a href="/list">Click to list db.json</a>.</p>
+          <p style="font-size: 200%">
+          <div class="deljson">
+            <input class="key-del" name="keydel" placeholder="Key to Delete from Json" maxlength="2" type="text">
+            <input onclick="deleteJson()" class="deleteit" type="submit" value="Submit">
+          </div>
       </div>
     </div>
   </div>
